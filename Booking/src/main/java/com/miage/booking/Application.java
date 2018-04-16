@@ -30,8 +30,8 @@ public class Application implements CommandLineRunner {
         repository.deleteAll();
 
         // save a couple of customers
-        repository.save(new Customer("Alice", "Smith"));
-        repository.save(new Customer("Bob", "Smith"));
+        repository.save(new Customer("Alice", "Smith", "1245"));
+        repository.save(new Customer("Bob", "Smith", "1246"));
 
         // fetch all customers
         System.out.println("Customers found with findAll():");
@@ -51,6 +51,16 @@ public class Application implements CommandLineRunner {
         for (Customer customer : repository.findByLastName("Smith")) {
             System.out.println(customer);
         }
+
+        // fetch an individual customer
+        System.out.println("Customer found with findByPhoneNumber('1245'):");
+        System.out.println("--------------------------------");
+        System.out.println(repository.findByPhoneNumber("1245"));
+
+        // fetch an individual customer
+        System.out.println("Customer found with findByPhoneFirst('Alice',1245'):");
+        System.out.println("--------------------------------");
+        System.out.println(repository.findByPhoneAndFirstName("Alice", "1245"));
 
     }
 
