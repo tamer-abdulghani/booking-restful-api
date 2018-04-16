@@ -10,5 +10,5 @@ package com.miage.booking;
  * @author mikhail
  */
 public class NewClass {
-    
+    public int test;
 }
