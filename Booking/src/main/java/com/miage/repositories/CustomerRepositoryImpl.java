@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.miage.booking;
+package com.miage.repositories;
 
+import com.miage.models.Customer;
 import com.mongodb.WriteResult;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

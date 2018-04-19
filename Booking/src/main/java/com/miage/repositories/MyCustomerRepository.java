@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.miage.booking;
+package com.miage.repositories;
+
+import com.miage.models.Customer;
 
 /**
  *
- * @author mikhail
+ * @author Tamer
  */
-public class NewClass {
-    public int test;
+public interface MyCustomerRepository {
+
+    public Customer findByPhoneAndFirstName(String firstName, String phone);
 }
