@@ -119,6 +119,8 @@ public class Application implements CommandLineRunner {
 
         repositoryBooking.save(b1);
 
+        Initiation.createFlights();
+
     }
 
 }
