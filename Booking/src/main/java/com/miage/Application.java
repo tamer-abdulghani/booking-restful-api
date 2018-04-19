@@ -138,6 +138,9 @@ public class Application implements CommandLineRunner {
         b1.setTravellers(liT);
 
         repositoryBooking.save(b1);
+
+        Initiation.createFlights();
+
         
         //Booking room part-----
         Hotel hot1= new Hotel("town1 street1", "First", 12345, 2, "1@1.fr", "06");
