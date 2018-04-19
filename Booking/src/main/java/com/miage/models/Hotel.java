@@ -27,14 +27,23 @@ public class Hotel {
     @DBRef
     private ArrayList<Room> rooms;        
 
-    public Hotel(String adress, String name, Integer postalcode, Integer rate, String email, String tel, ArrayList<Room> rooms) {
+    public Hotel(String adress, String name, Integer postalcode, Integer rate, String email, String tel) {
         this.adress = adress;
         this.name = name;
         this.postalcode = postalcode;
         this.rate = rate;
         this.email = email;
         this.tel = tel;
-        this.rooms = rooms;
+        this.rooms = new ArrayList<Room>();
+    }
+
+    public String getHotelId() {
+        return this.id;
+    }
+    
+    public void addRoom(Room room)
+    {
+        this.rooms.add(room);
     }
     
 }

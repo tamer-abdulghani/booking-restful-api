@@ -7,23 +7,26 @@ package com.miage.models;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author mikhail
  */
-
-@Document(collection="Rooms")
+@Document(collection = "Rooms")
 public class Room {
     @Id
     private String id;
     private RoomType roomType;
-    private Integer numberOfPerson;    
+    private Integer numberOfPerson;  
+    @DBRef
+    private Hotel hotel;
 
-    public Room(RoomType roomType, Integer numberOfPerson) {
+    public Room(RoomType roomType, Integer numberOfPerson,Hotel hotel) {
         this.roomType = roomType;
         this.numberOfPerson = numberOfPerson;
+        this.hotel=hotel;
     }
     
 }
