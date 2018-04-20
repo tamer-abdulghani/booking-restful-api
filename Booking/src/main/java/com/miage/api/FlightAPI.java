@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Tamer
  */
 @RestController
+@RequestMapping("/api")
 public class FlightAPI {
 
     private FlightRepository flightRepository;
@@ -29,10 +30,25 @@ public class FlightAPI {
         this.flightRepository = customerRepository;
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/flights/{origin}/{destination}")
+    public List<Flight> getFlightsByOriginDestination(@PathVariable("origin") String origin, @PathVariable("destination") String destination) {
+        if (origin != null && !"".equals(origin) && destination != null && !"".equals(destination)) {
+            return flightRepository.find(origin, destination, null);
+        } else {
+            return flightRepository.findAll();
+        }
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/flights")
-    public List<Flight> getFlights(@PathVariable String origin, @PathVariable String destination, @PathVariable String departuredate) {
-        //List<Flight> flights = flightRepository.find(origin, destination, departuredate);
-        return null;
+    public List<Flight> getFlights(
+            @RequestParam(value = "origin", required = true) String origin,
+            @RequestParam(value = "destination", required = true) String destination,
+            @RequestParam(value = "departuredate", required = true) String departuredate) {
+        if (origin != null && !"".equals(origin) && destination != null && !"".equals(destination)) {
+            return flightRepository.find(origin, destination, departuredate);
+        } else {
+            return flightRepository.findAll();
+        }
     }
 
 }

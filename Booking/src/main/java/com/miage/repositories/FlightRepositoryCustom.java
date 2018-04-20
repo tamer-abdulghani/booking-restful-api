@@ -5,15 +5,14 @@
  */
 package com.miage.repositories;
 
-import com.miage.models.Booking;
 import com.miage.models.Flight;
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author Tamer
  */
-public interface FlightRepository extends MongoRepository<Flight, String>, FlightRepositoryCustom {
+public interface FlightRepositoryCustom {
 
+    public List<Flight> find(String origin, String destination, String date);
 }
