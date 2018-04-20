@@ -30,8 +30,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Tamer
  */
 @SpringBootApplication(scanBasePackages = {
-    "com.miage.repositories", "com.miage.models"})
-@ComponentScan({"com.miage.repositories"})
+    "com.miage.repositories", "com.miage.models", "com.miage"})
+@ComponentScan({"com.miage.repositories", "com.miage"})
 public class Application implements CommandLineRunner {
 
     @Autowired
@@ -45,6 +45,9 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private FlightRepository repositoryFlight;
+
+    @Autowired
+    private Initiation initation;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -96,30 +99,32 @@ public class Application implements CommandLineRunner {
         LocalDateTime a = LocalDateTime.of(2015, Month.FEBRUARY, 20, 20, 06);
         LocalDateTime b = LocalDateTime.of(2015, Month.FEBRUARY, 20, 20, 06);
         LocalDate vc = LocalDate.of(1990, Month.MAY, 20);
-        Flight f = new Flight("TLS", "AMS", a, b, "AR350", 180, "FRA");
-        Flight f2 = new Flight("TLS2", "AMS", a, b, "AR350", 180, "FRA");
-        f = repositoryFlight.save(f);
-        f2 = repositoryFlight.save(f2);
 
-        Traveller t = new Traveller("Tamer", "AS", "ASD", "DCCSA", vc, "#.com");
-        Traveller t2 = new Traveller("Tamer2", "AS2", "ASD", "DCCSA", vc, "#.com");
-        Booking b1 = new Booking();
-        List<Flight> li = new ArrayList<Flight>();
-        li.add(f);
-        li.add(f2);
-
-        List<Traveller> liT = new ArrayList<Traveller>();
-        t = repositoryTraveller.save(t);
-        t2 = repositoryTraveller.save(t2);
-        liT.add(t);
-        liT.add(t2);
-
-        b1.setProducts(li);
-        b1.setTravellers(liT);
-
-        repositoryBooking.save(b1);
-
-        Initiation.createFlights();
+        initation.createFlights();
+//        Flight f = new Flight("TLS", "AMS", a, b, "AR350", 180, "FRA");
+//        Flight f2 = new Flight("TLS2", "AMS", a, b, "AR350", 180, "FRA");
+//        f = repositoryFlight.save(f);
+//        f2 = repositoryFlight.save(f2);
+//
+//        Traveller t = new Traveller("Tamer", "AS", "ASD", "DCCSA", vc, "#.com");
+//        Traveller t2 = new Traveller("Tamer2", "AS2", "ASD", "DCCSA", vc, "#.com");
+//        Booking b1 = new Booking();
+//        List<Flight> li = new ArrayList<Flight>();
+//        li.add(f);
+//        li.add(f2);
+//
+//        List<Traveller> liT = new ArrayList<Traveller>();
+//        t = repositoryTraveller.save(t);
+//        t2 = repositoryTraveller.save(t2);
+//        liT.add(t);
+//        liT.add(t2);
+//
+//        b1.setProducts(li);
+//        b1.setTravellers(liT);
+//
+//        repositoryBooking.save(b1);
+//
+//        Initiation.createFlights();
 
     }
 

@@ -17,23 +17,21 @@ public class Flight {
 
     @Id
     private String id;
-    private String origin;
-    private String destination;
+    private Airport origin;
+    private Airport destination;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private String flightNumber;
     private Integer duration;
     private String airlineCode;
 
-
-    public Flight(String origin, String destination, LocalDateTime departureTime, LocalDateTime arrivalTime, String flightNumber, Integer duration, String airlineCode) {
+    public Flight(Airport origin, Airport destination, LocalDateTime departureTime, LocalDateTime arrivalTime, String flightNumber, Integer duration) {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.flightNumber = flightNumber;
         this.duration = duration;
-        this.airlineCode = airlineCode;
     }
 
     public String getId() {
@@ -44,19 +42,19 @@ public class Flight {
         this.id = id;
     }
 
-    public String getOrigin() {
+    public Airport getOrigin() {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(Airport origin) {
         this.origin = origin;
     }
 
-    public String getDestination() {
+    public Airport getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(Airport destination) {
         this.destination = destination;
     }
 
