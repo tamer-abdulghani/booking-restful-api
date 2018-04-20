@@ -16,6 +16,7 @@ import com.miage.models.Room;
 import com.miage.models.RoomType;
 import com.miage.models.Traveller;
 import com.miage.models.roomBooked;
+import com.miage.repositories.AirportRepository;
 import com.miage.repositories.BookedRoomRepository;
 import com.miage.repositories.FlightRepository;
 import com.miage.repositories.HotelRepository;
@@ -63,6 +64,9 @@ public class Application implements CommandLineRunner {
     private RoomRepository repositoryRoom;
 
     @Autowired
+    private AirportRepository airportsRepository;
+
+    @Autowired
     private Initiation initation;
 
     public static void main(String[] args) {
@@ -79,8 +83,8 @@ public class Application implements CommandLineRunner {
         repositoryHotel.deleteAll();
         repositoryBookedRoom.deleteAll();
         repositoryRoom.deleteAll();
+        airportsRepository.deleteAll(); // save a couple of customers
 
-        // save a couple of customers
         repository.save(new Customer("Alice", "Smith", "1245"));
         repository.save(new Customer("Bob", "Smith", "1246"));
 

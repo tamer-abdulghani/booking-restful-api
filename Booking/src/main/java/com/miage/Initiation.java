@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miage.models.Airport;
 import com.miage.models.AirportsList;
 import com.miage.models.Flight;
+import com.miage.repositories.AirportRepository;
 import com.miage.repositories.FlightRepository;
 import java.io.File;
 import java.io.IOException;
@@ -33,10 +34,17 @@ public class Initiation {
     @Autowired
     private FlightRepository repositoryFlight;
 
+    @Autowired
+    private AirportRepository repositoryAirport;
+
     public void createFlights() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<Airport> listAirports = mapper.readValue(new File("src/main/resources/airports.json"), new TypeReference<List<Airport>>() {
         });
+
+        for (Airport a : listAirports) {
+            repositoryAirport.save(a);
+        }
 
         LocalDate localDate = LocalDate.now();
         for (int i = 0; i < 180; i++) {
@@ -52,10 +60,16 @@ public class Initiation {
                 int flightNumber = ThreadLocalRandom.current().nextInt(100, 600 + 1);
                 String flightNumberWithCode = originAirport.getCountry() + flightNumber;
 
+                float price = randomDuration * 150;
+
                 Flight f = new Flight(
                         originAirport,
                         destinationAirport,
-                        departureTime, arrivalTime, flightNumberWithCode, randomDuration);
+                        departureTime, arrivalTime,
+                        flightNumberWithCode,
+                        randomDuration,
+                        price
+                );
                 repositoryFlight.save(f);
             }
             localDate = localDate.plusDays(1);

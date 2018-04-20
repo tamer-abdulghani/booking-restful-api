@@ -35,6 +35,9 @@ public class Traveller {
         this.email = email;
     }
 
+    public Traveller() {
+    }
+
     public String getId() {
         return id;
     }

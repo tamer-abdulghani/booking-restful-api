@@ -1,0 +1,46 @@
+{
+    "bookingDate": "2018-04-11T07:00:00",
+    "flights": [
+        {
+            "id": "5ad9f97dd75c7743ec6d2278",
+            "origin": {
+                "icao": "LFBO",
+                "iata": "TLS",
+                "name": "Toulouse-Blagnac Airport",
+                "city": "Toulouse/Blagnac",
+                "state": "Occitanie",
+                "country": "FR",
+                "elevation": "499",
+                "lat": "43.6291007996",
+                "lon": "1.3638199568",
+                "tz": "Europe/Paris"
+            },
+            "destination": {
+                "icao": "LEBL",
+                "iata": "BCN",
+                "name": "Barcelona International Airport",
+                "city": "Barcelona",
+                "state": "Catalonia",
+                "country": "ES",
+                "elevation": "12",
+                "lat": "41.2971000671",
+                "lon": "2.0784599781",
+                "tz": "Europe/Madrid"
+            },
+            "departureTime": "2018-04-21T07:00:00",
+            "arrivalTime": "2018-04-21T10:00:00",
+            "flightNumber": "FR224",
+            "duration": 3
+        }
+    ],
+    "travellers": [
+        {
+            "firstName": "Tamer",
+            "lastName": "ABDULGHANI",
+            "phoneNumber": "068219789",
+            "passportId": "16464646",
+            "dateOfBirth": "1989-09-20",
+            "email": "tamer.abdulghani@gmail.com"
+        }
+    ]
+}

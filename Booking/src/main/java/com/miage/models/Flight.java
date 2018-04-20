@@ -23,15 +23,19 @@ public class Flight {
     private LocalDateTime arrivalTime;
     private String flightNumber;
     private Integer duration;
-    private String airlineCode;
+    private float price;
 
-    public Flight(Airport origin, Airport destination, LocalDateTime departureTime, LocalDateTime arrivalTime, String flightNumber, Integer duration) {
+    public Flight(Airport origin, Airport destination, LocalDateTime departureTime, LocalDateTime arrivalTime, String flightNumber, Integer duration, float price) {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.flightNumber = flightNumber;
         this.duration = duration;
+        this.price = price;
+    }
+
+    public Flight() {
     }
 
     public String getId() {
@@ -90,11 +94,11 @@ public class Flight {
         this.duration = duration;
     }
 
-    public String getAirlineCode() {
-        return airlineCode;
+    public float getPrice() {
+        return price;
     }
 
-    public void setAirlineCode(String airlineCode) {
-        this.airlineCode = airlineCode;
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

@@ -44,12 +44,8 @@ public class Booking {
         this.bookingDate = bookingDate;
     }
 
-    public List<Flight> getProducts() {
-        return flights;
-    }
-
-    public void setProducts(List<Flight> products) {
-        this.flights = products;
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 
     public List<Traveller> getTravellers() {
@@ -58,6 +54,10 @@ public class Booking {
 
     public void setTravellers(List<Traveller> travellers) {
         this.travellers = travellers;
+    }
+
+    public List<Flight> getFlights() {
+        return this.flights;
     }
 
 }
