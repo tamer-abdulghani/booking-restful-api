@@ -19,12 +19,12 @@ public class roomBooked {
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     @DBRef
-    private String RoomID;
+    private Room room;
 
-    public roomBooked(LocalDateTime checkIn, LocalDateTime checkOut, String RoomID) {
+    public roomBooked(LocalDateTime checkIn, LocalDateTime checkOut, Room room) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.RoomID = RoomID;
+        this.room = room;
     }
     
 }
