@@ -68,6 +68,7 @@ public class Booking {
 
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
+
     }
 
     public List<Traveller> getTravellers() {

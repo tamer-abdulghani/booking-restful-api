@@ -69,7 +69,7 @@ public class BookingAPI {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/list")
-    public List<Booking> listBookingsBetweenTwoDates(
+    public List<Booking> listBookingsByDates(
             @RequestParam(value = "startDate", required = true) Date startDate,
             @RequestParam(value = "endDate", required = true) Date endDate) {
         System.out.println("" + startDate);
@@ -79,7 +79,7 @@ public class BookingAPI {
 
     @RequestMapping(method = RequestMethod.POST, path = "/create")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public Booking book(@RequestBody
+    public Booking createBooking(@RequestBody
             @Valid Booking booking
     ) {
         if (booking.getTravellers().size() == 0 || booking.getFlights().size() == 0) {
@@ -87,7 +87,25 @@ public class BookingAPI {
         }
 
         for (Traveller t : booking.getTravellers()) {
-            t = travellerRepository.save(t);
+            if (t.getId() == null) {
+                t = travellerRepository.save(t);
+            }
+        }
+
+        return bookingRepository.save(booking);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/update")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Booking updateBooking(@RequestBody @Valid Booking booking) {
+        if (booking.getTravellers().size() == 0 || booking.getFlights().size() == 0) {
+            throw new BookingContainsNoProducts(2, "Booking contains no flights or travellers");
+        }
+
+        for (Traveller t : booking.getTravellers()) {
+            if (t.getId() == null) {
+                t = travellerRepository.save(t);
+            }
         }
 
         return bookingRepository.save(booking);
@@ -95,7 +113,7 @@ public class BookingAPI {
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/cancel/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void cancel(@PathVariable String id) {
+    public void cancelBooking(@PathVariable String id) {
         bookingRepository.deleteById(id);
     }
 
