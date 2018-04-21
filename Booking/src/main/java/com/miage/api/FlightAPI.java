@@ -46,7 +46,7 @@ public class FlightAPI {
                 return fo.get();
             }
         }
-        return null;
+        throw new FlightNotFoundException(1, "Flight not found");
     }
 
     @RequestMapping(method = RequestMethod.GET)

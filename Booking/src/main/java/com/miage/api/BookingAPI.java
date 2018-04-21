@@ -7,6 +7,7 @@ package com.miage.api;
 
 import com.miage.models.Booking;
 import com.miage.models.Traveller;
+import com.miage.models.exception.BookingContainsNoProducts;
 import com.miage.models.exception.BookingNotFoundException;
 import com.miage.models.exception.ExceptionInfo;
 import com.miage.repositories.BookingRepository;
@@ -57,7 +58,7 @@ public class BookingAPI {
                 return booking.get();
             }
         }
-        return null;
+        throw new BookingNotFoundException(1, "Booking not found");
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/list")
@@ -75,8 +76,7 @@ public class BookingAPI {
             @Valid Booking booking
     ) {
         if (booking.getTravellers().size() == 0 || booking.getFlights().size() == 0) {
-            //ToDo: return good message exception 
-            return null;
+            throw new BookingContainsNoProducts(2, "Booking contains no flights or travellers");
         }
 
         for (Traveller t : booking.getTravellers()) {

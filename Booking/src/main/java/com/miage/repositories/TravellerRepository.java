@@ -5,9 +5,7 @@
  */
 package com.miage.repositories;
 
-import com.miage.models.Booking;
 import com.miage.models.Traveller;
-import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
