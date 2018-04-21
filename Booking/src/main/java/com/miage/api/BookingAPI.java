@@ -6,6 +6,7 @@
 package com.miage.api;
 
 import com.miage.models.Booking;
+import com.miage.models.PaymentAccess;
 import com.miage.models.Traveller;
 import com.miage.models.exception.BookingContainsNoProducts;
 import com.miage.models.exception.BookingNotFoundException;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -43,6 +47,9 @@ public class BookingAPI {
 
     private BookingRepository bookingRepository;
     private TravellerRepository travellerRepository;
+    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private Environment env;
 
     @Autowired
     public BookingAPI(BookingRepository bookingRepository, TravellerRepository travellerRepository) {
@@ -90,6 +97,27 @@ public class BookingAPI {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void cancel(@PathVariable String id) {
         bookingRepository.deleteById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/payment/accesskey")
+    public String paymentAccessKey(@RequestBody @Valid Booking booking) {
+        PaymentAccess accessObject = new PaymentAccess();
+        accessObject.setBookingId(booking.getId());
+        accessObject.setfName(booking.getTravellers().get(0).getFirstName());
+        accessObject.setlName(booking.getTravellers().get(0).getLastName());
+        accessObject.setEmail(booking.getTravellers().get(0).getEmail());
+        accessObject.setPhone(booking.getTravellers().get(0).getPhoneNumber());
+        accessObject.setAmount(booking.getTotalAmount());
+
+        HttpEntity<PaymentAccess> request = new HttpEntity<PaymentAccess>(accessObject);
+
+        String host = env.getProperty("payment.api.host");
+        String port = env.getProperty("payment.api.port");
+        String myApiKey = env.getProperty("payment.api.key");
+
+        String accessKey = restTemplate.postForObject("http://" + host + ":" + port + "/accounts/" + myApiKey + "/paymentAccessKey", request, String.class);
+
+        return accessKey;
     }
 
     @InitBinder

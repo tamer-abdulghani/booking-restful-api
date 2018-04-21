@@ -34,6 +34,22 @@ public class Booking {
     @DBRef
     private List<Traveller> travellers;
 
+    private float totalAmount;
+
+    public float getTotalAmount() {
+        float amount = 0;
+        for (Flight f : this.flights) {
+            amount += f.getPrice();
+        }
+
+        this.totalAmount = amount;
+        return totalAmount;
+    }
+
+    public void setTotalAmount(float totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
     public String getId() {
         return id;
     }
