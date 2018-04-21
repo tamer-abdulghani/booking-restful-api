@@ -5,7 +5,8 @@
  */
 package com.miage.repositories;
 
-import com.miage.models.Flight;
+import com.miage.models.Booking;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -16,24 +17,23 @@ import org.springframework.data.mongodb.core.query.Query;
  *
  * @author Tamer
  */
-public class FlightRepositoryCustomImpl implements FlightRepositoryCustom {
+public class BookingRepositoryCustomImpl implements BookingRepositoryCustom {
 
     @Autowired
     MongoTemplate mongoTemplate;
 
     @Override
-    public List<Flight> find(String origin, String destination, String date) {
+    public List<Booking> find(Date startDate, Date endDate) {
         Query query = new Query();
         query.addCriteria(
-                new Criteria().andOperator(
-                        Criteria.where("origin.iata").is(origin),
-                        Criteria.where("destination.iata").is(destination)
-                // ,Criteria.where("departureTime").is(date)
-                )
+                new Criteria()
+                        .andOperator(
+                                Criteria.where("bookingDate").gte(startDate).lte(endDate)
+                        )
         );
 
-        List<Flight> flights = mongoTemplate.find(query, Flight.class);
-        return flights;
+        List<Booking> bookings = mongoTemplate.find(query, Booking.class);
+        return bookings;
     }
 
 }

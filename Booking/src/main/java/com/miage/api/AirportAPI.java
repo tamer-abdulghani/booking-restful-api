@@ -7,7 +7,6 @@ package com.miage.api;
 
 import com.miage.models.Airport;
 import com.miage.repositories.AirportRepository;
-import com.miage.repositories.FlightRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

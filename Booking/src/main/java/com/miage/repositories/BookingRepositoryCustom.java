@@ -6,13 +6,14 @@
 package com.miage.repositories;
 
 import com.miage.models.Booking;
+import java.util.Date;
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author Tamer
  */
-public interface BookingRepository extends MongoRepository<Booking, String>, BookingRepositoryCustom {
+public interface BookingRepositoryCustom {
 
+    public List<Booking> find(Date startDate, Date endDate);
 }

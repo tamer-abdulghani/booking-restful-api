@@ -76,14 +76,18 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        if (repositoryFlight.count() < 100) {
+            repositoryFlight.deleteAll();
+            airportsRepository.deleteAll();
+            initation.createFlights();
+        }
+
         repository.deleteAll();
-        repositoryFlight.deleteAll();
         repositoryTraveller.deleteAll();
         repositoryBooking.deleteAll();
         repositoryHotel.deleteAll();
         repositoryBookedRoom.deleteAll();
         repositoryRoom.deleteAll();
-        airportsRepository.deleteAll(); // save a couple of customers
 
         repository.save(new Customer("Alice", "Smith", "1245"));
         repository.save(new Customer("Bob", "Smith", "1246"));
@@ -123,7 +127,6 @@ public class Application implements CommandLineRunner {
         LocalDateTime b = LocalDateTime.of(2015, Month.FEBRUARY, 20, 20, 06);
         LocalDate vc = LocalDate.of(1990, Month.MAY, 20);
 
-        initation.createFlights();
 //        Flight f = new Flight("TLS", "AMS", a, b, "AR350", 180, "FRA");
 //        Flight f2 = new Flight("TLS2", "AMS", a, b, "AR350", 180, "FRA");
 //        f = repositoryFlight.save(f);
@@ -148,7 +151,6 @@ public class Application implements CommandLineRunner {
 //        repositoryBooking.save(b1);
 //
 //        Initiation.createFlights();
-
         //Booking room part-----
         Hotel hot1 = new Hotel("town1 street1", "First", 12345, 2, "1@1.fr", "06");
         Hotel hot2 = new Hotel("town2 street2", "Second", 54321, 2, "2@2.fr", "07");

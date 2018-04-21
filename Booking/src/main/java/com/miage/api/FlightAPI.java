@@ -44,7 +44,7 @@ public class FlightAPI {
             @RequestParam(value = "origin", required = true) String origin,
             @RequestParam(value = "destination", required = true) String destination,
             @RequestParam(value = "departuredate", required = true) String departuredate) {
-        if (origin != null && !"".equals(origin) && destination != null && !"".equals(destination)) {
+        if (origin != null && !"".equals(origin) && destination != null && !"".equals(destination) && departuredate != null) {
             return flightRepository.find(origin, destination, departuredate);
         } else {
             return flightRepository.findAll();
