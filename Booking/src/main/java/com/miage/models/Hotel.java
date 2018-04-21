@@ -14,8 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author mikhail
  */
-@Document(collection="Hotels")
+@Document(collection = "hotels")
 public class Hotel {
+
     @Id
     private String id;
     private String adress;
@@ -25,7 +26,7 @@ public class Hotel {
     private String email;
     private String tel;
     @DBRef
-    private ArrayList<Room> rooms;        
+    private ArrayList<Room> rooms;
 
     public Hotel(String adress, String name, Integer postalcode, Integer rate, String email, String tel) {
         this.adress = adress;
@@ -40,10 +41,9 @@ public class Hotel {
     public String getHotelId() {
         return this.id;
     }
-    
-    public void addRoom(Room room)
-    {
+
+    public void addRoom(Room room) {
         this.rooms.add(room);
     }
-    
+
 }

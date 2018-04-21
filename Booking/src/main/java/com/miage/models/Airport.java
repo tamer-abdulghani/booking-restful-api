@@ -5,11 +5,16 @@
  */
 package com.miage.models;
 
+import org.springframework.data.annotation.Id;
+
 /**
  *
  * @author Tamer
  */
 public class Airport {
+
+    @Id
+    private String id;
 
     private String icao;
     private String iata;
@@ -21,6 +26,14 @@ public class Airport {
     private String lat;
     private String lon;
     private String tz;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getIcao() {
         return icao;

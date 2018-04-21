@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author Tamer
  */
-@Document(collection = "Traveller")
+@Document(collection = "travellers")
 public class Traveller {
 
     @Id

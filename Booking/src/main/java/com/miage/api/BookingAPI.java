@@ -7,23 +7,28 @@ package com.miage.api;
 
 import com.miage.models.Booking;
 import com.miage.models.Traveller;
+import com.miage.models.exception.BookingNotFoundException;
+import com.miage.models.exception.ExceptionInfo;
 import com.miage.repositories.BookingRepository;
 import com.miage.repositories.TravellerRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -91,5 +96,12 @@ public class BookingAPI {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10));
+    }
+
+    @ExceptionHandler(BookingNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    ExceptionInfo handleBadRequest(HttpServletRequest req, Exception ex) {
+        return new ExceptionInfo(1, "Booking not found", "url");
     }
 }
