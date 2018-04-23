@@ -78,7 +78,7 @@ public class BookingAPI {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/create")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
     public Booking createBooking(@RequestBody
             @Valid Booking booking
     ) {
