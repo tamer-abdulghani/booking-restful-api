@@ -12,6 +12,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author Tamer
  */
-public interface AirportRepository extends MongoRepository<Airport, String>, AirportRepositoryCustom {
+public interface AirportRepository
+        extends MongoRepository<Airport, String>,
+        AirportRepositoryCustom {
 
 }

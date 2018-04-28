@@ -62,7 +62,9 @@ public class FlightAPI {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{origin}/{destination}")
-    public List<Flight> getFlightsWithPathVariables(@PathVariable("origin") String origin, @PathVariable("destination") String destination) {
+    public List<Flight> getFlightsWithPathVariables(
+            @PathVariable("origin") String origin,
+            @PathVariable("destination") String destination) {
         if (origin != null && !"".equals(origin) && destination != null && !"".equals(destination)) {
             return flightRepository.find(origin, destination, null);
         } else {
@@ -74,6 +76,6 @@ public class FlightAPI {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     ExceptionInfo handleBadRequest(HttpServletRequest req, Exception ex) {
-        return new ExceptionInfo(1, "Booking not found", "url");
+        return new ExceptionInfo(1, "Flight not found", "url");
     }
 }

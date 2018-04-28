@@ -26,7 +26,13 @@ public class AirportRepositoryCustomImpl implements AirportRepositoryCustom {
         Query query = new Query();
         query.addCriteria(
                 new Criteria()
-                        .orOperator(Criteria.where("name").regex(nameLike, "i"), Criteria.where("city").regex(nameLike, "i"))
+                        .orOperator(
+                                Criteria
+                                        .where("name")
+                                        .regex(nameLike, "i"),
+                                Criteria
+                                        .where("city")
+                                        .regex(nameLike, "i"))
         );
 
         List<Airport> airports = mongoTemplate.find(query, Airport.class);

@@ -133,7 +133,9 @@ public class BookingAPI {
         String port = env.getProperty("payment.api.port");
         String myApiKey = env.getProperty("payment.api.key");
 
-        String accessKey = restTemplate.postForObject("http://" + host + ":" + port + "/accounts/" + myApiKey + "/paymentAccessKey", request, String.class);
+        String accessKey
+                = restTemplate.postForObject("http://" + host + ":" + port + "/accounts/"
+                        + myApiKey + "/paymentAccessKey", request, String.class);
 
         return accessKey;
     }

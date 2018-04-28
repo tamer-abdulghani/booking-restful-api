@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/airports")
 public class AirportAPI {
-
     private AirportRepository airportRepository;
 
     @Autowired

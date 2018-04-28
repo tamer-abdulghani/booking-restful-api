@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author Tamer
  */
-public interface BookingRepository extends MongoRepository<Booking, String>, BookingRepositoryCustom {
+public interface BookingRepository
+        extends MongoRepository<Booking, String>,
+        BookingRepositoryCustom {
 
 }

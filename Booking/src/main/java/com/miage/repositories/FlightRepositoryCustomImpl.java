@@ -28,7 +28,6 @@ public class FlightRepositoryCustomImpl implements FlightRepositoryCustom {
                 new Criteria().andOperator(
                         Criteria.where("origin.iata").is(origin),
                         Criteria.where("destination.iata").is(destination)
-                // ,Criteria.where("departureTime").is(date)
                 )
         );
 
